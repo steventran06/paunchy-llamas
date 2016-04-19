@@ -20,7 +20,7 @@ app.use(methodOverride());
 //set up routes here from routes file
 require('./routes')(app, express);
 
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 8000;
 
 app.listen(port);
 
