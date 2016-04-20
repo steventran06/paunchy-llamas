@@ -6,6 +6,7 @@
     'codellama.auth',
     'codellama.fileUpload',
     'codellama.nav',
+    'codellama.codeshare',
     'ngRoute'])
 
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
@@ -47,6 +48,10 @@
       .when('/tutor/:username', {
         templateUrl: 'app/tutors/tutor.html',
         controller: 'TutorController'
+      })
+      .when('/tutor/:username/codeshare', {
+        templateUrl: 'app/codeshare/codeshare.html',
+        controller: 'CodeshareController'
       })
       .when('/about', {
         templateUrl: 'app/about/about.html'
