@@ -6,7 +6,7 @@ angular.module('codellama.codeshare', [])
     $scope.init = function() {
       $scope.addCodeshare();
     };
-    var socket = io('http://localhost:8000');
+    var socket = io('http://107.170.10.76:8000');
     var partPath = $location.$$path.slice(7);
     var path = partPath.slice(0, partPath.indexOf('/'))
     socket.on('connect', function() {
