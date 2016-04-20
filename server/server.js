@@ -21,6 +21,13 @@ app.use(methodOverride());
 
 io.on('connection', function(socket) {
   console.log('A user has connected');
+  socket.on('disconnect', function() {
+    console.log('A user has disconnected');
+  });
+  socket.on('type code', (letter) => {
+    // io.emit('type code');
+    console.log(letter);
+  });
 });
 
 //set up routes here from routes file
