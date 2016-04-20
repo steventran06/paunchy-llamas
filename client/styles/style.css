@@ -798,6 +798,7 @@ i.inactive {
   height: 500px;
 }
 
+<<<<<<< bdb2770d6eff662d0b0297add8e58f0ee75c8e50
 .toggleButton {
   float: right;
 }
@@ -808,4 +809,8 @@ i.inactive {
   float: right;
   margin-left: 10px;
   margin-right: 10px;
+=======
+#codeshareBox {
+  text-align: left !important;
+>>>>>>> (feat) Add line numbers in gutter and make text align left
 }
