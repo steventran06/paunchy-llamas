@@ -1,6 +1,9 @@
 <!-- Code Share -->
 <div id="container-codeshare">
-  <div id="codeshareBox" ng-controller="CodeshareController">
+  <div id="codeshare-box" ng-controller="CodeshareController">
+    <div id="codeshare-input" ng-init="addCodeshare()">
+      <button type="submit" class="codeshare-tab" ng-click="addCodeshare()">+</button>
+    </div>
+    <button type="submit" class="inputButton searchButton">Save</button>
   </div>
-  <button type="submit" class="inputButton searchButton">Save</button>
 </div>
