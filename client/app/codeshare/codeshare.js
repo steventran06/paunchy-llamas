@@ -1,7 +1,4 @@
 angular.module('codellama.codeshare', [])
-  .service('CodeshareService', function() {
-    this.code = 'lol';
-  })
   .controller('CodeshareController', function($scope, $location) {
     $scope.init = function() {
       $scope.addCodeshare();
@@ -195,5 +192,3 @@ angular.module('codellama.codeshare', [])
       return codeshare;
     };
   });
-
-
