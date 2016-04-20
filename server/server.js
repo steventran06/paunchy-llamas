@@ -20,13 +20,18 @@ app.use(bodyParser.json({limit: '5mb'}));
 app.use(methodOverride()); 
 
 io.on('connection', function(socket) {
+  console.log(socket.id);
   console.log('A user has connected');
   socket.on('disconnect', function() {
     console.log('A user has disconnected');
   });
-  socket.on('type code', (letter) => {
+  socket.on('join codeshare room', (username) => {
+    // var nsp = io.of(username);
+    socket.join(username);
+  });
+  socket.on('type code', (letter, path) => {
     // io.emit('type code');
-    console.log(letter);
+    io.sockets.in(path).emit('code', 'some sample code');
   });
 });
 
