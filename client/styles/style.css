@@ -93,14 +93,11 @@ h1 {
 }
 
 #searchBar {
-  margin-top: 44px;
-  height: 60px;
-  width: 100%;
-  background-color: #E4F1FE;
   padding: 10px;
-  margin: 20px auto;
+  height: 60px;
   width: 65%;
   background-color: #E4F1FE;
+  margin: 20px auto;
 }
 
 .input-profile {
