@@ -6,8 +6,9 @@ angular.module('codellama.codeshare', [])
     $scope.code = 'console.log(yaya)';
 
     var myCodeMirror = CodeMirror(document.getElementById('codeshareBox'), {
-      value: "Write your code here",
-      mode:  "javascript"
+      value: 'Write your code here',
+      mode:  'javascript',
+      theme: 'ambiance'
     });
     document.getElementByClass('Codemirror')[1].remove();
   });
