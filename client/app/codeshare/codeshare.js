@@ -4,4 +4,10 @@ angular.module('codellama.codeshare', [])
   })
   .controller('CodeshareController', function($scope) {
     $scope.code = 'console.log(yaya)';
+
+    var myCodeMirror = CodeMirror(document.getElementById('codeshareBox'), {
+      value: "Write your code here",
+      mode:  "javascript"
+    });
+    document.getElementByClass('Codemirror')[1].remove();
   });
