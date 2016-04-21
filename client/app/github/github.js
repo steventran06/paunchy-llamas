@@ -6,10 +6,11 @@ angular.module('codellama.github', [])
   if($scope.title === undefined) { return; }
     $scope.reposLoaded = false;
     $scope.userLoaded = false;
-    //$scope.username = $scope.title;
-    $scope.username = 'torsinclair';
+    $scope.username = $scope.title;
       $http.get("https://api.github.com/users/" + $scope.username)
         .success(function (data) {
+          console.log(data);
+          console.log($scope.username);
           $scope.userData = data;
           loadRepos();
           });
@@ -22,5 +23,6 @@ angular.module('codellama.github', [])
     };
   
   $scope.predicate = '-updated_at';
-  }
+  };
+
 }]);

@@ -7,6 +7,7 @@
     'codellama.fileUpload',
     'codellama.nav',
     'codellama.codeshare',
+    'codellama.github',
     'ngRoute'])
 
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
@@ -76,7 +77,7 @@
       var attach = {
         request: function (object) {
           var jwt = $window.localStorage.getItem('com.codellama');
-          if (jwt && !(object.url.includes('maps.googleapis.com'))) {
+          if (jwt && !(object.url.includes('maps.googleapis.com')) && !(object.url.includes('api.github.com'))) {
             object.headers['x-access-token'] = jwt;
           }
           // object.headers['Allow-Control-Allow-Origin'] = '*';

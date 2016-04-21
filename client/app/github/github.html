@@ -1,4 +1,4 @@
-  <div class="container" ng-controller="gitHubDataController">
+  <div ng-controller="gitHubDataController">
     <div class="row">
       <div class="col-md-4">
         <span>
@@ -20,11 +20,11 @@
       <div class="row list-group-item">
         <div class="col-md-4">
           <h4>
-              <a href="{{repo.html_url}}" target="_blank">
-                  {{repo.name}}
-                </br>
-              </a>
-              <small>{{repo.description}}</small>
+            <a href="{{repo.html_url}}" target="_blank" >
+                {{repo.name}}
+              </br>
+            </a>
+            <small>{{repo.description}}</small>
           </h4>
         </div>
         <div class="col-sm-4">
