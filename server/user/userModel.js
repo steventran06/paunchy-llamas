@@ -10,6 +10,7 @@ var userSchema = new mongoose.Schema({
   email: {type: String, required: true, unique: true},
   password: String, // hash and salt password...
   location: Object,
+  coordinates: Object,
   address: Object,
   isTutor: Boolean,
   bio: String,

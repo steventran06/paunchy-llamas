@@ -5,7 +5,7 @@
   <div class="profile-box-large">
     <form name="myForm" ng-switch="isTutor">
       <fieldset>
-
+        
         <div id="tutor-update-question-container">
           <span class="tutor-update-question">Are you a registered tutor / signing up to be a tutor? <br> Check here if yes... </span><input type="checkbox" class="checkbox checkbox-inline" ng-model="data.isTutor" />
         </div>  
@@ -14,9 +14,19 @@
           <i class="tutor-update-question"></i>
           <input type="text" name="name" class="input-profile pass" placeholder="Full Name (required)" ng-model="data.name" size="31" required />
           <i class="tutor-update-question"></i>
-          <select name="city" class="input-profile pass" ng-model="data.location.city" required>
-            <option value="" disabled selected>Select a city (required)</option>
-            <option ng-repeat="city in cities" value={{city}}>{{city}}</option>
+
+          <i class="tutor-update-question"></i>
+          <input type="text" name="name" class="input-profile pass" placeholder="Home Address (don't worry, we won't share this with anyone)" ng-model="data.location.address" size="31" required />
+          <i class="tutor-update-question"></i>
+
+          <i class="tutor-update-question"></i>
+          <input type="text" name="name" class="input-profile pass" placeholder="City" ng-model="data.location.city" size="31" required />
+          <i class="tutor-update-question"></i>
+
+
+          <select name="state" class="input-profile pass" ng-model="data.location.state" required>
+            <option value="" disabled selected>Select a state (required)</option>
+            <option ng-repeat="state in states" value={{state}}>{{state}}</option>
           </select>
 
           <textarea ng-show="data.isTutor" type="textarea" name="bio" class="input-bio pass" ng-model="data.bio" rows="10" cols="50" placeholder="Please tell us about yourself and your experience"></textarea>
@@ -77,8 +87,6 @@
             <button class="inputButton signinButton"  ng-click="uploadPic(picFile)">All done!</button>
             <!-- ng-disabled="!myForm.$valid" -->
           </div>
-
-
 
         </div> <!-- end of container-image-upload -->
 
