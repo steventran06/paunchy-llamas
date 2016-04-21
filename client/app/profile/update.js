@@ -6,7 +6,7 @@ app.controller('uploadCtrl', ['$scope', '$http', 'uiGmapGoogleMapApi', 'Upload',
   $scope.data.subjects = [];
   $scope.data.location = {};
   $scope.data.coordinates = {};
-
+  $scope.data.times = [];
 
   // some map shit
   // angular.extend($scope, {
@@ -29,6 +29,16 @@ app.controller('uploadCtrl', ['$scope', '$http', 'uiGmapGoogleMapApi', 'Upload',
   // GoogleMapApi.then(function(maps) {
   //   maps.visualRefresh = true;
   // });
+
+  $scope.times = [
+    'Espresso Shift (6am - 9am)',
+    'Coffee Shift (9am - Noon)',
+    'Black Tea Shift (Noon - 3pm)',
+    'Latte Shift (3pm - 6pm)',
+    'Mocha Shift (6pm - 9pm)',
+    'Green Tea Shift (9pm - Midnight)',
+    'Red Bull Shift (Midnight - 6am)'
+  ];
 
   $scope.subjects = [
     'Javascript',

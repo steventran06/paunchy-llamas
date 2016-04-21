@@ -702,6 +702,12 @@ select:invalid {
   padding-left: 30px;
 }
 
+.times-table {
+  width: 50%;
+  margin: auto;
+  padding-left: 20px;
+}
+
 .subjects-table-entry {
   text-align: left;
 }
