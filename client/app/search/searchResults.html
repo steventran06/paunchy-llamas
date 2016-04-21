@@ -2,8 +2,15 @@
 <div class="container-search-results">
   <div id="search-results-title">Your search results...</div>
 
+
   <!-- Search results entry -->
   <div class="profile-text" ng-hide="subjectLength">Sorry, no matches!</div>
+
+  <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+    <ui-gmap-circle ng-repeat="c in map.circles track by c.id" center="c.center" stroke="c.stroke" fill="c.fill" radius="c.radius"
+      visible="c.visible" geodesic="c.geodesic" editable="c.editable" draggable="c.draggable" clickable="c.clickable" control="c.control"></ui-gmap-circle>
+  </ui-gmap-google-map>
+
 
   <div class="container-tutor-card" ng-repeat="tutor in tutorData">
 

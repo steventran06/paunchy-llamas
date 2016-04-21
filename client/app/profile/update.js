@@ -1,10 +1,34 @@
 /* This module handles updating the profile, including photo upload, subjects, and cities */
-var app = angular.module('codellama.fileUpload', ['ngFileUpload', 'checklist-model']);
+var app = angular.module('codellama.fileUpload', ['ngFileUpload', 'checklist-model', 'uiGmapgoogle-maps']);
 
-app.controller('uploadCtrl', ['$scope', 'Upload', '$timeout', '$location', '$window', '$rootScope', function ($scope, Upload, $timeout, $location, $window, $rootScope) {
+app.controller('uploadCtrl', ['$scope', '$http', 'uiGmapGoogleMapApi', 'Upload', '$timeout', '$location', '$window', '$rootScope', function ($scope, $http, GoogleMapApi, Upload, $timeout, $location, $window, $rootScope) {
   $scope.data = {};
   $scope.data.subjects = [];
   $scope.data.location = {};
+  $scope.data.coordinates = {};
+
+
+  // some map shit
+  // angular.extend($scope, {
+  //   map: {center: 
+  //     { 
+  //       latitude: 37.7749, 
+  //       longitude: -122.4194
+  //     }, 
+  //     zoom: 12,
+  //     markers: [{ 
+  //       latitude: 37.7749, 
+  //       longitude: -122.4194
+  //     }]
+  //   },
+  //   options: {
+  //     scrollwheel: true
+  //   }
+  // });
+
+  // GoogleMapApi.then(function(maps) {
+  //   maps.visualRefresh = true;
+  // });
 
   $scope.subjects = [
     'Javascript',
@@ -18,19 +42,62 @@ app.controller('uploadCtrl', ['$scope', 'Upload', '$timeout', '$location', '$win
     'CSS'
   ];
 
-  $scope.cities = [
-    'San Francisco',
-    'San Jose',
-    'San Mateo',
-    'Cupertino',
-    'Mountain View',
-    'Sunnyvale',
-    'Berkeley',
-    'Oakland'
+  $scope.states = [
+    'Alabama',
+    'Alaska',
+    'Arizona',
+    'Arkansas',
+    'California',
+    'Colorado',
+    'Connecticut',
+    'Delaware',
+    'District Of Columbia',
+    'Florida',
+    'Georgia',
+    'Hawaii',
+    'Idaho',
+    'Illinois',
+    'Indiana',
+    'Iowa',
+    'Kansas',
+    'Kentucky',
+    'Louisiana',
+    'Maine',
+    'Maryland',
+    'Massachusetts',
+    'Michigan',
+    'Minnesota',
+    'Mississippi',
+    'Missouri',
+    'Montana',
+    'Nebraska',
+    'Nevada',
+    'New Hampshire',
+    'New Jersey',
+    'New Mexico',
+    'New York',
+    'North Carolina',
+    'North Dakota',
+    'Ohio',
+    'Oklahoma',
+    'Oregon',
+    'Pennsylvania',
+    'Rhode Island',
+    'South Carolina',
+    'South Dakota',
+    'Tennessee',
+    'Texas',
+    'Utah',
+    'Vermont',
+    'Virginia',
+    'Washington',
+    'West Virginia',
+    'Wisconsin',
+    'Wyoming'
   ];
 
-  $scope.uploadPic = function(file) { //uploads pic and/or new profile information
 
+  $scope.uploadPic = function(file) { //uploads pic and/or new profile information
     // data.isTutor is assigned conditionally in update.html
     // but we want it to be default true for becometutor.html
     // console.log('$scope.data.isTutor is',$scope.data.isTutor);
@@ -43,30 +110,39 @@ app.controller('uploadCtrl', ['$scope', 'Upload', '$timeout', '$location', '$win
 
     if (!file) { var file = {}; } else {  $scope.data.file = file;  }
 
-    file.upload = Upload.upload({
-      url: 'api/users/profile',
-      data: $scope.data
-    });
+      var myAddress = $scope.data.location;
+      var street = myAddress.address.split(' ').join('+');
+      var city = myAddress.city.split(' ').join('+');
+      var state = myAddress.state.split(' ').join('+');
+      $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + street + city + state + '&key=AIzaSyCrq_adWxK-NFB96FMg_2jtJcJBoMbXVNA').success(function(data) {
+        $scope.data.coordinates = data.results[0].geometry.location;
+        console.log($scope.data);
+        file.upload = Upload.upload({
+          url: 'api/users/profile',
+          data: $scope.data
+        });
 
-    file.upload.then(function (response) {
-      $timeout(function () {
-        file.result = response.data;
+        file.upload.then(function (response) {
+          $timeout(function () {
+            file.result = response.data;
+          });
+          // reset become tutor option, if the tutor form 'is tutor' checkbox is checked
+          if ($scope.data.isTutor) {
+            $rootScope.isTutor = true;
+            $window.localStorage.setItem('isTutor', true);
+          }
+          // redirect to home
+          $location.path('/');
+
+        }, function (response) {
+          if (response.status > 0) {
+            $scope.errorMsg = response.status + ': ' + response.data;
+          }
+        }, function (evt) {
+        // Math.min is to fix IE which reports 200% sometimes
+        file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
       });
-      // reset become tutor option, if the tutor form 'is tutor' checkbox is checked
-      if ($scope.data.isTutor) {
-        $rootScope.isTutor = true;
-        $window.localStorage.setItem('isTutor', true);
-      }
-      // redirect to home
-      $location.path('/');
-
-    }, function (response) {
-      if (response.status > 0) {
-        $scope.errorMsg = response.status + ': ' + response.data;
-      }
-    }, function (evt) {
-      // Math.min is to fix IE which reports 200% sometimes
-      file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
     });
+      
   };
 }]);
