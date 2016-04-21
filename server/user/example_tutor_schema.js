@@ -13,6 +13,10 @@
   subjects: [
     'javascript',
     'angular'
+  ],
+  times: [
+    'Coffee Shift (9am - Noon)',
+    'Black Tea Shift (Noon - 3pm)',
+    'Mocha Shift (6pm - 9pm)'
   ]
-
 }
