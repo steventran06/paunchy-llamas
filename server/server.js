@@ -31,7 +31,7 @@ io.on('connection', function(socket) {
   });
   socket.on('type code', (text, path) => {
     console.log(text);
-    io.sockets.in(path).emit('code', 'text');
+    io.sockets.in(path).emit('code', text);
   });
 });
 
