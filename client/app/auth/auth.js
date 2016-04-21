@@ -41,7 +41,7 @@ angular.module('codellama.auth', [])
 
         console.log('$rootScope:', $rootScope.loggedIn, $rootScope.isTutor);
 
-        $location.path('/');
+        $location.path('/update');
       })
       .catch(function (error) {
         console.error(error);

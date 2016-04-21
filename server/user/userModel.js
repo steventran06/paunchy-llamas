@@ -11,6 +11,7 @@ var userSchema = new mongoose.Schema({
   password: String, // hash and salt password...
   location: Object,
   coordinates: Object,
+  github: String,
   address: Object,
   isTutor: Boolean,
   bio: String,
