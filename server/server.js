@@ -19,6 +19,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json({limit: '5mb'}));
 app.use(methodOverride()); 
 
+// sockets.io
 io.on('connection', function(socket) {
   console.log(socket.id);
   console.log('A user has connected');
@@ -30,7 +31,6 @@ io.on('connection', function(socket) {
     socket.join(username);
   });
   socket.on('type code', (text, path) => {
-    console.log(text);
     io.sockets.in(path).emit('code', text);
   });
 });

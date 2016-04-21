@@ -41,15 +41,14 @@ angular.module('codellama.codeshare', [])
     var patch_text = '';
 
     // This finds the difference between the code of user1 and user2
-    $scope.codeDiff = function(code1, code2) {
+    var codeDiff = function(code1, code2) {
       var d = dmp.diff_main(code1, code2, true);
-      var prettyD = dmp.diff_prettyHtml(d);
       var patch_list = dmp.patch_make(code1, code2, d);
       patch_text = dmp.patch_toText(patch_list);
-      return $scope.codePatch(code1);
+      return codePatch(code1);
     };
 
-    $scope.codePatch = function(code) {
+    var codePatch = function(code) {
       var patches = dmp.patch_fromText(patch_text);
       var results = dmp.patch_apply(patches, code);
       return results[0];
@@ -62,10 +61,12 @@ angular.module('codellama.codeshare', [])
         theme: 'ambiance',
         lineNumbers: true
       });
-      myCodeMirror.on('change', emit.bind(myCodeMirror));
+      myCodeMirror.on('keypress', emit.bind(myCodeMirror));
       socket.on('code', function(theirCode) {
         var myCode = myCodeMirror.getValue();
-        var diff = JSON.parse($scope.codeDiff(myCode, theirCode));
+        var diff = JSON.parse(codeDiff(myCode, theirCode));
+        var cursorPos = myCodeMirror.getCursor();
+        console.log('Hello : ', cursorPos);
         if (diff !== myCode) {
           myCodeMirror.setValue(diff);
         }
