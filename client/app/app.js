@@ -53,6 +53,10 @@
         templateUrl: 'app/codeshare/codeshare.html',
         controller: 'CodeshareController'
       })
+      .when('/tutor/:username/github', {
+        templateUrl: 'app/github/github.html',
+        controller: 'gitHubDataController'
+      })
       .when('/about', {
         templateUrl: 'app/about/about.html'
       })

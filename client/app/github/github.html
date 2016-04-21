@@ -1,0 +1,42 @@
+  <div class="container" ng-controller="gitHubDataController">
+    <div class="row">
+      <div class="col-md-4">
+        <span>
+            <h4>
+              <span ng-show="repoData">
+                Tutor Name: {{userData.name}}
+              </span>
+            </h4>
+        </span>      
+      </div>
+      <div class="col-md-4">
+        <form class="text-center" ng-submit="onSubmit()">
+          <input type="text" ng-model="title" />
+          <button type="submit">SEARCH</button>
+        </form>      
+      </div>
+    </div>
+    <div ng-repeat="repo in repoData | filter:searchText  | orderBy:predicate:reverse">
+      <div class="row list-group-item">
+        <div class="col-md-4">
+          <h4>
+              <a href="{{repo.html_url}}" target="_blank">
+                  {{repo.name}}
+                </br>
+              </a>
+              <small>{{repo.description}}</small>
+          </h4>
+        </div>
+        <div class="col-sm-4">
+          <dl class="dl-horizontal">
+            <dt>Last Updated:</dt>
+            <dd>{{repo.updated_at | date : short : timezone}}</dd>
+            <dt>Created:</dt>
+            <dd>{{repo.created_at| date : short : timezone}}</dd>
+          </dl>
+        </div>
+        <div class="col-sm-4">
+        </div>
+    </div>
+  </div>
+</div>
