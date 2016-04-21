@@ -29,9 +29,9 @@ io.on('connection', function(socket) {
     // var nsp = io.of(username);
     socket.join(username);
   });
-  socket.on('type code', (letter, path) => {
-    // io.emit('type code');
-    io.sockets.in(path).emit('code', 'some sample code');
+  socket.on('type code', (text, path) => {
+    console.log(text);
+    io.sockets.in(path).emit('code', 'text');
   });
 });
 

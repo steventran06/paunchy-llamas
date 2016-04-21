@@ -23,7 +23,9 @@ angular.module('codellama.codeshare', [])
         lineNumbers: true
       });
       myCodeMirror.on('change', function(target, name, args) {
-        socket.emit('type code', name.text[0], path);
+        var code = myCodeMirror.getValue();
+        var text = JSON.stringify(code);
+        socket.emit('type code', text, path);
       })
     };
   });
