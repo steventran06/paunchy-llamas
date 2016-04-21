@@ -16,6 +16,7 @@ var userSchema = new mongoose.Schema({
   isTutor: Boolean,
   bio: String,
   subjects: Array,
+  times: Array,
   imageId: String, //a ref to the image file stored by gridfs
   likers: Array
 });

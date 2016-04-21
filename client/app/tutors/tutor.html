@@ -29,15 +29,18 @@
     </table>
     </div>
 
-
     <div class="profile-content-large">
       <div class="profile-text"><span class="tutor-name">{{tutor.name}}</span></div>
       <div class="profile-text">
         <span class="tutor-bio">{{tutor.bio}}</span>
       </div>
+      <div><strong>Typical Availability</strong></div>
+      <ul>
+      <li ng-repeat="time in tutor.times">{{time}}</li>
+      </ul>
 
-      <div class="profile-text">
-        <div class="tutor-subjects">{{tutor.subjects.join(', ')}}</div>
+      <div class="tutor-subjects">{{tutor.subjects.join(', ')}}</div>
+
       </div>
       <div class="profile-text"><span class="tutor-city">{{tutor.location.city}}</span></div>
     </div>

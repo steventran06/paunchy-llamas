@@ -16,6 +16,10 @@
           <i class="tutor-update-question"></i>
 
           <i class="tutor-update-question"></i>
+          <input type="text" name="name" class="input-profile pass" placeholder="Github Handle" ng-model="data.github" size="31"/>
+          <i class="tutor-update-question"></i>
+
+          <i class="tutor-update-question"></i>
           <input type="text" name="name" class="input-profile pass" placeholder="Home Address (don't worry, we won't share this with anyone)" ng-model="data.location.address" size="31" required />
           <i class="tutor-update-question"></i>
 
@@ -49,11 +53,28 @@
             </tr>
           </table>
           </div>
+
         </div> <!-- end of name-city-bio -->
 
-        <i class="tutor-update-question"></i>
-        <input type="text" name="name" class="input-profile pass" placeholder="Github Handle" ng-model="data.github" size="31"/>
-        <i class="tutor-update-question"></i>
+          <div id="tutor-update-subjects">
+            <span class="tutor-update-question">Select the times you are typically available </span>
+          </div>
+
+          <div class="times-table">
+          <table>
+            <tr ng-repeat="time in times" class="subjects-table-entry">
+            <td>
+              <label class="update-subject-item"> 
+                <input type="checkbox" class="checkbox checkbox-inline" checklist-model="data.times" checklist-value="time" >
+                <span class="subjects-list"> {{time}}</span>
+              </label>
+            <td>
+            </tr>
+          </table>
+          </div>
+
+
+
 
         <div id="container-image-upload">
           <div class="container-upload-title">
