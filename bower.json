@@ -20,6 +20,7 @@
     "angular-google-maps": "^2.3.2",
     "socket.io-client": "^1.4.5",
     "codemirror": "^5.14.2",
-    "google-diff-match-patch-js": "^1.0.0"
+    "google-diff-match-patch-js": "^1.0.0",
+    "angular-google-maps": "^2.3.2"
   }
 }
