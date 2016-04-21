@@ -17,7 +17,7 @@ app.controller('uploadCtrl', ['$scope', '$http', 'uiGmapGoogleMapApi', 'Upload',
     'Green Tea Shift (9pm - Midnight)',
     'Red Bull Shift (Midnight - 6am)'
   ];
-  
+
   $scope.subjects = [
     'Javascript',
     'C',
