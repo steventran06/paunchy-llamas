@@ -34,28 +34,41 @@ app.service('SearchService', function($http, $window) {
 
 });
 
-app.controller('SearchController', function ($scope, SearchService, $location) {
+app.controller('SearchController', function ($scope, $http, SearchService, $location) {
 
+  SearchService.getProfile()
+    .then(function(profile) {
+      SearchService.myData = profile;
+      console.log(profile);
+    })
+    .catch(function(error) {
+      console.log('There was an error retrieving profile data: ', error);
+  });
+    
   // define search on scope
   $scope.search = function(city, subjects) {
-
-
     // call function from SearchService
     SearchService.getTutors(city, subjects)
-
       // upon success, assign returned tutors data to scope's tutorData
       .then(function(tutors) {
-        SearchService.tutorData = tutors;
-        SearchService.getProfile()
-          .then(function(profile) {
-            SearchService.myData = profile;
-            $location.path('/search');
-          })
-          .catch(function(error) {
-            console.log('There was an error retrieving profile data: ', error);
-        });
-      })
+        var userLat = SearchService.myData.coordinates.lat;
+        var userLng = SearchService.myData.coordinates.lng;
 
+        for (var i = 0; i < tutors.length; i++) {
+          var tutor = tutors[i];
+          var lat = tutor.coordinates.lat;
+          var lng = tutor.coordinates.lng;
+          $http.get('https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='+ userLat + "," + userLng + "&destinations=" + lat + "," + lng + '&key=AIzaSyAzoQMg9Pt-fERCwyXdhxwwGGNXlzty9Ng')
+            .success(function(data) {
+              tutor.distance = data.rows[0].elements[0].distance.text;
+            });
+        }
+
+        SearchService.tutorData = tutors;
+        console.log(tutors);
+        $location.path('/search');
+
+      })
       // on error, console log error
       .catch(function(error) {
         console.log('There was an error retrieving tutor data: ', error);
@@ -76,9 +89,10 @@ app.controller('SearchResultsController', function ($scope, $timeout, uiGmapGoog
 
   $scope.$watch(
     function() { return SearchService.tutorData; },
-
-
     function(newVal) {
+      // var profile = newVal.shift();
+      // console.log(profile);
+      // console.log(newVal);
       if (newVal.length !== 0) {
         var centerLatitude = 0;
         var centerLongitude = 0;

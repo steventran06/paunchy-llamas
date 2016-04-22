@@ -8,28 +8,6 @@ app.controller('uploadCtrl', ['$scope', '$http', 'uiGmapGoogleMapApi', 'Upload',
   $scope.data.coordinates = {};
   $scope.data.times = [];
 
-  // some map shit
-  // angular.extend($scope, {
-  //   map: {center: 
-  //     { 
-  //       latitude: 37.7749, 
-  //       longitude: -122.4194
-  //     }, 
-  //     zoom: 12,
-  //     markers: [{ 
-  //       latitude: 37.7749, 
-  //       longitude: -122.4194
-  //     }]
-  //   },
-  //   options: {
-  //     scrollwheel: true
-  //   }
-  // });
-
-  // GoogleMapApi.then(function(maps) {
-  //   maps.visualRefresh = true;
-  // });
-
   $scope.times = [
     'Espresso Shift (6am - 9am)',
     'Coffee Shift (9am - Noon)',
@@ -107,6 +85,7 @@ app.controller('uploadCtrl', ['$scope', '$http', 'uiGmapGoogleMapApi', 'Upload',
   ];
 
 
+  
   $scope.uploadPic = function(file) { //uploads pic and/or new profile information
     // data.isTutor is assigned conditionally in update.html
     // but we want it to be default true for becometutor.html
@@ -124,6 +103,7 @@ app.controller('uploadCtrl', ['$scope', '$http', 'uiGmapGoogleMapApi', 'Upload',
       var street = myAddress.address.split(' ').join('+');
       var city = myAddress.city.split(' ').join('+');
       var state = myAddress.state.split(' ').join('+');
+
       $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + street + city + state + '&key=AIzaSyCrq_adWxK-NFB96FMg_2jtJcJBoMbXVNA').success(function(data) {
         $scope.data.coordinates = data.results[0].geometry.location;
         console.log($scope.data);
