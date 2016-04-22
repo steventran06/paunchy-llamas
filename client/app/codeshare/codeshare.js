@@ -44,8 +44,9 @@ angular.module('codellama.codeshare', [])
     // Emit code
     var emitKeypress = debounce(function(target, name, args) {
       var code = this.getValue();
+      var cursorLoc = this.getCursor();
       var text = JSON.stringify(code);
-      socket.emit('type code', text, username);
+      socket.emit('type code', text, username, cursorLoc);
     }, 50);
 
     // Load in the Google Difference, Match, Patch algorithm
@@ -59,7 +60,7 @@ angular.module('codellama.codeshare', [])
       var d = dmp.diff_main(code1, code2, true);
       var patch_list = dmp.patch_make(code1, code2, d);
       patch_text = dmp.patch_toText(patch_list);
-      console.log(patch_text);
+      // console.log(patch_text);
       return codePatch(code1);
     };
     // Patch code after finding a difference between the two
@@ -84,27 +85,46 @@ angular.module('codellama.codeshare', [])
       var codeshare = createCodeMirror();
       codeshare.eventHandlers = function() {
         this.on('keypress', emitKeypress.bind(this));
-        socket.on('code', function(theirCode) {
+
+        socket.on('code', function(theirCode, theirCursorLoc) {
+          // Get current user's code
           var myCode = this.getValue();
+          // Get a stringified version of the diffed + patched code between current user's code and other user's code.
+          // We don't parse this right away since we use the stringified version as well later on in the code.
           var patchString = codeDiff(myCode, theirCode);
+          // Parse code to set value inside of the Code mirror, or else we will have quotes around our code.
           var patch = JSON.parse(patchString);
           // Get cursor location so that the cursor on CodeMirror doesn't reset.
           var cursorPos = this.getCursor();
 
+          console.log('Their cursor loc: ', theirCursorLoc);
+          console.log('My cursor loc: ', cursorPos);
+
+          var theirCursorLocPrevChar = {
+            line: theirCursorLoc.line,
+            ch: theirCursorLoc.ch - 1
+          }
+          console.log(theirCursorLocPrevChar, theirCursorLoc);
+          
+
           if (patch !== myCode) {
             this.setValue(patch);
+          }
+          if (theirCursorLoc.line !== cursorPos.line || theirCursorLoc.ch !== cursorPos.ch) {
+            console.log('Inside of the mark text');
+            this.markText(theirCursorLocPrevChar, theirCursorLoc, {className: 'other-user'});
           }
           // setting cursor position when the text in the field changes
           // this prevents the cursor from showing up at line 0 character 0 whenever the codeshare window updates with new code
           var newLineBreaks = patch_text.match(/%0A/g);
-          console.log(patch_text);
-          console.log(newLineBreaks);
+          // console.log(patch_text);
+          // console.log(newLineBreaks);
           lineBreaksLength = newLineBreaks ? newLineBreaks.length : null;
           var newLineBreaksLength = lineBreaksLength - prevLineBreaksLength || 0
           prevLineBreaksLength = lineBreaksLength;
-          console.log('line breaks: ', lineBreaksLength);
-          console.log('new line breaks: ', newLineBreaksLength);
-          console.log('prev line breaks: ', prevLineBreaksLength);
+          // console.log('line breaks: ', lineBreaksLength);
+          // console.log('new line breaks: ', newLineBreaksLength);
+          // console.log('prev line breaks: ', prevLineBreaksLength);
           if (newLineBreaksLength > 0) {
             // console.log('cursor line position: ', cursorPos.line);
             // console.log('cursor character position: ', cursorPos.ch);
@@ -120,7 +140,7 @@ angular.module('codellama.codeshare', [])
       };
       codeMirrors.push(codeshare);
       codeMirrors[codeMirrors.length - 1].eventHandlers();
-      console.log(codeMirrors);
+      // console.log(codeMirrors);
       return codeshare;
     };
   });

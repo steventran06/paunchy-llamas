@@ -35,8 +35,8 @@ io.on('connection', function(socket) {
       socket.emit('send saved code data', codeshareCode[username]);
     }
   });
-  socket.on('type code', (text, path) => {
-    io.sockets.in(path).emit('code', text);
+  socket.on('type code', (text, path, cursorLoc) => {
+    io.sockets.in(path).emit('code', text, cursorLoc);
   });
   socket.on('save code', (username, patch, lineBreaksLength, prevLineBreaksLength) => {
     codeshareCode[username] = {
