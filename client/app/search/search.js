@@ -29,6 +29,7 @@ app.service('SearchService', function($http, $window) {
       url: '/api/users/myProfile',
     }).then(function(resp) {
       return resp.data;
+      console.log(resp.data)
     });
   };
 

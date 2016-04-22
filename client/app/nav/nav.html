@@ -1,10 +1,9 @@
 <div id="logo"><span>Code Tutor</span></div>
-  <div id="cssmenu" ng-app='codellama.nav'>
 
+<div ng-app='codellama.nav'>
 
-  <h1>On Off switch using Angular JS</h1>
-  <div ng-controller="ToggleController" ng-init="init()">
-    <div class="well">
+  <div ng-controller="ToggleController" ng-init="init()" ng-show='loggedIn'>
+    <div id="toggleButton" ng-show='isTutor'>
       <i class="fa fa-toggle-on active"
          ng-if="status == true" 
          ng-click="changeStatus();">
@@ -14,10 +13,11 @@
          ng-click="changeStatus();">
       </i>
     </div>
-    <pre>{{ status }}</pre>
+    <div ng-show='status'>You are open for business!</div>
+    <div ng-show='!status'>Let students know you're online.</div>
   </div>
 
-  <div ng-controller='NavController'>
+  <div id="cssmenu" ng-controller='NavController'>
     <div id="nav-buttons">
       <ul>
         <li ng-class="{ active: isActive('/')}"><a href='/#'>Home</a></li>
@@ -29,5 +29,5 @@
       </ul>
     </div>
   </div>
-</div>
 
+</div>

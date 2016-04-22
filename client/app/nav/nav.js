@@ -1,21 +1,22 @@
 angular.module('codellama.nav', [])
 
 .service('ToggleService', function($http) {
-  this.toggleOn = function(username) {
+
+  this.getProfile = function() {
+    // var token = $window.localStorage.getItem('com.codellama');
     return $http({
-      method: 'PUT',
-      data: {username: username},
-      url: '/api/tutor/toggleOn'
-    })
-    .then(function(resp) {
+      method: 'GET',
+      url: '/api/users/myProfile',
+    }).then(function(resp) {
       return resp.data;
+      console.log('data is ', resp.data)
     });
-  };
-  this.toggleOff = function(username) {
+  }; 
+  this.toggle = function(username, status) {
     return $http({
       method: 'PUT',
-      data: {username: username},
-      url: '/api/tutor/toggleOn'
+      data: {username: username, status: status},
+      url: '/api/tutor/toggle'
     })
     .then(function(resp) {
       return resp.data;
@@ -31,44 +32,39 @@ angular.module('codellama.nav', [])
   }
 })
 
-.controller('ToggleController', function($scope, $rootScope, Auth){
+.controller('ToggleController', function($scope, ToggleService){
   
   $scope.init = function(){
-    $scope.status = 1;
+    // 0 is on, 1 is off
+    $scope.status = 0;
   }
   
   $scope.changeStatus = function(){
 
+    // toggle status
     if ($scope.status === 1) {
       $scope.status = 0
     } else {
       $scope.status = 1
     }
 
-    console.log('$rootScope is', $rootScope)
-    console.log('$scope is', $scope)
-    console.log('Auth is ', Auth)
+    // get current logged in user
+    ToggleService.getProfile()
+      .then(function(res) {
+        var username = res.username;
+        console.log('status is', res.status)
 
-
-    if ($scope.status === 1) {
-      console.log('status is 1')
-      // ToggleService.toggleOn(username)
-      // .then(function(resp) {
-      //   $scope.tutor.status = resp.status;
-      // })
-      // .catch(function(error) {
-      //   console.log('there was an error updating status to on', error);
-      // });      
-    } else {
-      console.log('status is 0')
-      // ToggleService.toggleOff(username)
-      // .then(function(resp) {
-      //   $scope.tutor.status = resp.status;
-      // })
-      // .catch(function(error) {
-      //   console.log('there was an error toggling status off', error);
-      // });     
-    }
+        // toggle on or off
+        ToggleService.toggle(username, $scope.status)
+          .then(function(res) {
+          })
+          .catch(function(err) {
+            console.log(err)
+          })
+      })
+      .catch(function(err) {
+        console.log(err);
+      })
   }
 })
 

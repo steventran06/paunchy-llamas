@@ -450,15 +450,15 @@ button[disabled] {
 }
 
 #search-results-title {
-    font-size: 2.5em;
-    color: #fff;
-    text-align: center; 
+  font-size: 2.5em;
+  color: #fff;
+  text-align: center; 
 }
 
 #update-profile-title {
-    font-size: 2.5em;
-    color: #fff;
-    text-align: center;
+  font-size: 2.5em;
+  color: #fff;
+  text-align: center;
 }
 
 .container-search-results{
@@ -762,7 +762,6 @@ select:invalid {
 .angular-google-map-container { 
   height: 400px; 
 }
-<<<<<<< c7061f107df959ce61f0be16013ae58e4c927046
 
 .labelClass {
   color: #000000;
@@ -772,5 +771,22 @@ select:invalid {
   line-height: 12px;
 } 
 
-=======
->>>>>>> Fix rebase conflict 3
+.active, .inactive {
+  font-size:40px;cursor:pointer;
+}
+
+.active, .inactive {
+  font-size:40px;cursor:pointer;
+}
+
+i.active { 
+  color: #5cb85c
+}
+
+i.inactive {
+  color: #d9534f
+}
+
+.toggleButton {
+  float: right;
+}

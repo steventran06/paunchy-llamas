@@ -87,25 +87,13 @@ module.exports = {
     });
   },
 
-
-  // or just do TWO functions - one for on, one for off? 
-  // toggleStatus: function(req, res) {
-
-    // find the user who is toggle status, check to see if they are a tutor ($root.LoggedIn, $root.IsTutor)
-    // push the new status
-
-  //   // helpers.decode gives us the username of the person adding a "like" and ensures the requester has a valid token (signed in)
-  //   findUser({username: req.body.username})
-  //   .then(function(User) {
-  //     if (User.likers.indexOf(req.user.username) === -1 && req.body.username !== req.user.username) {
-  //       updateUser({username: req.body.username}, {$inc: {likes: 1}, $push: {likers: req.user.username}}, {new: true}, function(err, doc) {
-  //         if (!err) {
-  //           res.send({likes: doc.likes});
-  //         }
-  //       });
-  //     }
-  //   });
-  // },
+  toggle: function(req, res) {
+    updateUser({username: req.body.username}, {status: req.body.status}, function(err, doc) {
+      if (!err) {
+        res.send(doc);
+      }
+    });
+  },
 
 
   // updates a tutor's profile from /update
