@@ -19,6 +19,8 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json({limit: '5mb'}));
 app.use(methodOverride()); 
 
+var codeshareCode = {};
+
 // sockets.io
 io.on('connection', function(socket) {
   console.log(socket.id);
@@ -29,9 +31,19 @@ io.on('connection', function(socket) {
   socket.on('join codeshare room', (username) => {
     // var nsp = io.of(username);
     socket.join(username);
+    if (codeshareCode[username]) {
+      socket.emit('send saved code data', codeshareCode[username]);
+    }
   });
   socket.on('type code', (text, path) => {
     io.sockets.in(path).emit('code', text);
+  });
+  socket.on('save code', (username, patch, lineBreaksLength, prevLineBreaksLength) => {
+    codeshareCode[username] = {
+      patch: patch,
+      lineBreaksLength: lineBreaksLength,
+      prevLineBreaksLength: prevLineBreaksLength
+    };
   });
 });
 
