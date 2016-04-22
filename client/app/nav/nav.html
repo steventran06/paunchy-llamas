@@ -8,13 +8,13 @@
          ng-if="status == true" 
          ng-click="changeStatus();">
       </i>
+      <div ng-show="status"> You are open for business!</div>
       <i class="fa fa-toggle-on fa-rotate-180 inactive"
          ng-if="status == false"
          ng-click="changeStatus();">
       </i>
+      <div ng-show='!status'>Let students know you're online.</div>
     </div>
-    <div ng-show='status'>You are open for business!</div>
-    <div ng-show='!status'>Let students know you're online.</div>
   </div>
 
   <div id="cssmenu" ng-controller='NavController'>

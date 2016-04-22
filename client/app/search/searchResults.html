@@ -26,7 +26,13 @@
       </div>
 
       <div class="profile-content">
-        <div class="profile-text"><a ng-href="/tutor/{{tutor.username}}" /><span class="tutor-name">{{tutor.name}}</span></a></div>
+        <div class="profile-text"><a ng-href="/tutor/{{tutor.username}}" />
+          <span class="tutor-name">{{tutor.name}}</span>
+          <span class="greenlight" ng-show="tutor.status">
+            <img ng-src="../assets/greenlight.png" />
+          </span>
+          </a>
+        </div>
 
         <div class="profile-text"><span class="tutor-bio">{{tutor.bio.substring(0, 160) + '...'}}</span></div>
 

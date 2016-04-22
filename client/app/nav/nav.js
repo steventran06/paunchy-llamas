@@ -34,29 +34,50 @@ angular.module('codellama.nav', [])
 
 .controller('ToggleController', function($scope, ToggleService){
   
+
   $scope.init = function(){
-    // 0 is on, 1 is off
-    $scope.status = 0;
+    $scope.status = true;
+
+        // get current logged in user
+    ToggleService.getProfile()
+      .then(function(res) {
+        var username = res.username;
+        console.log('previous status was ', res.status)
+
+        // toggle on or off
+        ToggleService.toggle(username, $scope.status)
+          .then(function(res) {
+            console.log('status has been changed to ', $scope.status)
+          })
+          .catch(function(err) {
+            console.log(err)
+          })
+      })
+      .catch(function(err) {
+        console.log(err);
+      })
+
   }
   
   $scope.changeStatus = function(){
 
     // toggle status
-    if ($scope.status === 1) {
-      $scope.status = 0
+    if ($scope.status === false) {
+      $scope.status = true;
     } else {
-      $scope.status = 1
+      $scope.status = false;
     }
 
     // get current logged in user
     ToggleService.getProfile()
       .then(function(res) {
         var username = res.username;
-        console.log('status is', res.status)
+        console.log('previous status was ', res.status)
 
         // toggle on or off
         ToggleService.toggle(username, $scope.status)
           .then(function(res) {
+            console.log('status has been changed to ', $scope.status)
           })
           .catch(function(err) {
             console.log(err)
