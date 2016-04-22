@@ -7,29 +7,6 @@ app.controller('uploadCtrl', ['$scope', '$http', 'uiGmapGoogleMapApi', 'Upload',
   $scope.data.location = {};
   $scope.data.coordinates = {};
 
-
-  // some map shit
-  // angular.extend($scope, {
-  //   map: {center: 
-  //     { 
-  //       latitude: 37.7749, 
-  //       longitude: -122.4194
-  //     }, 
-  //     zoom: 12,
-  //     markers: [{ 
-  //       latitude: 37.7749, 
-  //       longitude: -122.4194
-  //     }]
-  //   },
-  //   options: {
-  //     scrollwheel: true
-  //   }
-  // });
-
-  // GoogleMapApi.then(function(maps) {
-  //   maps.visualRefresh = true;
-  // });
-
   $scope.subjects = [
     'Javascript',
     'C',
