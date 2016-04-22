@@ -762,6 +762,7 @@ select:invalid {
 .angular-google-map-container { 
   height: 400px; 
 }
+<<<<<<< c7061f107df959ce61f0be16013ae58e4c927046
 
 .labelClass {
   color: #000000;
@@ -771,3 +772,5 @@ select:invalid {
   line-height: 12px;
 } 
 
+=======
+>>>>>>> Fix rebase conflict 3
