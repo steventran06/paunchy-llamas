@@ -1,8 +1,15 @@
 <!-- Code Share -->
 <div id="container-codeshare">
-  <div id="tutor-prof"></div>
-  <div id="user-prof"></div>
+  <div id="connected-users">
+    <div class="connected-user"></div>
+  </div>
   <div id="codeshare-box" >
+    <!-- language selection -->
+    <select ng-options="language for language in languages" ng-model="language" ng-init="language = languages[6]" ng-change="setLanguage(language)" name="languages" id="languages" class="codeshare-select">
+    </select>
+    <!-- theme selection -->
+    <select ng-options="theme for theme in themes" ng-model="theme" ng-init="theme = themes[0]" ng-change="setTheme(theme)" name="themes" id="themes" class="codeshare-select">
+    </select>
     <div id="codeshare-input" ng-init="init()">
       <button type="submit" class="codeshare-tab" ng-click="addCodeshare()">+</button>
     </div>

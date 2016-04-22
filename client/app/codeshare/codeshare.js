@@ -6,6 +6,68 @@ angular.module('codellama.codeshare', [])
     $scope.init = function() {
       $scope.addCodeshare();
     };
+
+    $scope.languages = [
+      'select a language',
+      'clike',
+      'coffeescript',
+      'css',
+      'django',
+      'html',
+      'javascript',
+      'jsx',
+      'lua',
+      'markdown',
+      'python',
+      'ruby',
+      'sass',
+      'sql',
+      'swift',
+      'yaml',
+    ];
+
+    $scope.themes = [
+      'ambiance',
+      '3024-day',
+      '3024-night',
+      'cobalt',
+      'dracula',
+      'eclipse',
+      'elegant',
+      'hopscotch',
+      'icecoder',
+      'isotope',
+      'lesser-dark',
+      'liquibyte',
+      'material',
+      'mbo',
+      'mdn-like',
+      'midnight',
+      'monokai',
+      'neat',
+      'pastels-on-dark',
+      'rubyblue',
+      'seti',
+      'solarized',
+      'the-matrix',
+      'tomorrow-night-bright',
+      'tomorrow-night-eighties',
+      'twilight',
+      'vibrant-ink',
+      'xq-dark',
+      'xq-light',
+      'yeti',
+      'zenburn',
+    ];
+
+    $scope.setLanguage = function(lang) {
+      console.log('This is the language: ', lang);
+      codeMirrors[0].setOption('mode', lang);
+    };
+    $scope.setTheme = function(theme) {
+      console.log('theme: ', theme)
+      codeMirrors[0].setOption('theme', theme);
+    };
     var socket = io('http://localhost:8000');
     // var socket = io('http://107.170.10.76:8000');
     var partPath = $location.$$path.slice(7);
@@ -25,7 +87,8 @@ angular.module('codellama.codeshare', [])
     // Create an array of code mirrors since we want to have multiple tabs
     var codeMirrors = [];
 
-    // Debounce function
+    // Debounce function from underscore
+    // TODO: put this somewhere more relevant, like a utils file
     function debounce(func, wait, immediate) {
       var timeout;
       return function() {
@@ -41,7 +104,7 @@ angular.module('codellama.codeshare', [])
       };
     };
 
-    // Emit code
+    // Emit debounced data
     var emitKeypress = debounce(function(target, name, args) {
       var code = this.getValue();
       var cursorLoc = this.getCursor();
@@ -97,48 +160,36 @@ angular.module('codellama.codeshare', [])
           // Get cursor location so that the cursor on CodeMirror doesn't reset.
           var cursorPos = this.getCursor();
 
-          console.log('Their cursor loc: ', theirCursorLoc);
-          console.log('My cursor loc: ', cursorPos);
-
           var theirCursorLocPrevChar = {
             line: theirCursorLoc.line,
             ch: theirCursorLoc.ch - 1
           }
-          console.log(theirCursorLocPrevChar, theirCursorLoc);
           
-
           if (patch !== myCode) {
             this.setValue(patch);
           }
           if (theirCursorLoc.line !== cursorPos.line || theirCursorLoc.ch !== cursorPos.ch) {
-            console.log('Inside of the mark text');
             this.markText(theirCursorLocPrevChar, theirCursorLoc, {className: 'other-user'});
           }
           // setting cursor position when the text in the field changes
           // this prevents the cursor from showing up at line 0 character 0 whenever the codeshare window updates with new code
           var newLineBreaks = patch_text.match(/%0A/g);
-          // console.log(patch_text);
-          // console.log(newLineBreaks);
           lineBreaksLength = newLineBreaks ? newLineBreaks.length : null;
           var newLineBreaksLength = lineBreaksLength - prevLineBreaksLength || 0
           prevLineBreaksLength = lineBreaksLength;
-          // console.log('line breaks: ', lineBreaksLength);
-          // console.log('new line breaks: ', newLineBreaksLength);
-          // console.log('prev line breaks: ', prevLineBreaksLength);
-          if (newLineBreaksLength > 0) {
-            // console.log('cursor line position: ', cursorPos.line);
-            // console.log('cursor character position: ', cursorPos.ch);
-            // console.log('line breaks length: ', lineBreaksLength);
-            // console.log('cursor line position + line breaks length: ', cursorPos.line + lineBreaksLength);
-            this.setCursor(cursorPos.line + newLineBreaksLength, cursorPos.ch);
-          } else {
-            this.setCursor(cursorPos.line, cursorPos.ch);
-          }
+          this.setCursor(cursorPos.line, cursorPos.ch);
+          // Naive solution to dealing with line breaks. Does not work completely, and we are better off without it for demo
+          // if (newLineBreaksLength > 0) {
+          //   this.setCursor(cursorPos.line + newLineBreaksLength, cursorPos.ch);
+          // } else {
+          //   this.setCursor(cursorPos.line, cursorPos.ch);
+          // }
           socket.emit('save code', username, patchString, lineBreaksLength, prevLineBreaksLength);
           // myCodeMirror.setValue(code);
         }.bind(this));
       };
       codeMirrors.push(codeshare);
+      // Initializes the event handlers and listeners
       codeMirrors[codeMirrors.length - 1].eventHandlers();
       // console.log(codeMirrors);
       return codeshare;
