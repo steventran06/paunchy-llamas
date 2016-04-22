@@ -3,17 +3,17 @@
 <div ng-app='codellama.nav'>
 
   <div ng-controller="ToggleController" ng-init="init()" ng-show='loggedIn'>
-    <div id="toggleButton" ng-show='isTutor'>
+    <div id="toggleButton">
       <i class="fa fa-toggle-on active"
          ng-if="status == true" 
          ng-click="changeStatus();">
       </i>
-      <div ng-show="status"> You are open for business!</div>
+      <div ng-show="status"> You are available to chat!</div>
       <i class="fa fa-toggle-on fa-rotate-180 inactive"
          ng-if="status == false"
          ng-click="changeStatus();">
       </i>
-      <div ng-show='!status'>Let students know you're online.</div>
+      <div ng-show='!status'>Let others know you're online.</div>
     </div>
   </div>
 
