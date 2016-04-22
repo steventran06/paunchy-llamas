@@ -864,3 +864,16 @@ i.inactive {
   border: none;
   border-radius: 0 5px 0 0;
 }
+
+.other-user {
+  background-color: #2dd;
+  color: #fff;
+}
+
+.codeshare-select {
+  font-family: 'Open Sans', sans-serif;
+  color: #555;
+  border: none;
+  height: 30px;
+  margin: 5px;
+}
