@@ -87,6 +87,15 @@ module.exports = {
     });
   },
 
+  toggle: function(req, res) {
+    updateUser({username: req.body.username}, {status: req.body.status}, function(err, doc) {
+      if (!err) {
+        res.send(doc);
+      }
+    });
+  },
+
+
   // updates a tutor's profile from /update
   saveProfile: function(req, res) {
     // helpers.decode gives us the username from the token on this request

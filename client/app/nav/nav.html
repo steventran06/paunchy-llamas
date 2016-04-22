@@ -1,13 +1,33 @@
 <div id="logo"><span>Code Tutor</span></div>
-<div id="cssmenu" ng-app='codellama.nav' ng-controller='NavController'>
-<div id="nav-buttons">
-  <ul>
-    <li ng-class="{ active: isActive('/')}"><a href='/#'>Home</a></li>
-    <li ng-class="{ active: isActive('/login')}" ng-hide='loggedIn'><a href='/#/login'>Login</a></li>
-    <li ng-class="{ active: isActive('/signup')}" ng-hide='loggedIn'><a href='/#/signup'>Signup</a></li>
-    <li ng-class="{ active: isActive('/update')}" ng-show='loggedIn'><a href='/#/update'>Update profile</a></li>
-    <li ng-class="{ active: isActive('/becometutor')}" ng-show='!isTutor'><a href='/#/becometutor'>Become a tutor</a></li>
-    <li ng-show='loggedIn'><a href="/logout">Logout</a></li>
-  </ul>
-</div>
+
+<div ng-app='codellama.nav'>
+
+  <div ng-controller="ToggleController" ng-init="init()" ng-show='loggedIn'>
+    <div id="toggleButton" ng-show='isTutor'>
+      <i class="fa fa-toggle-on active"
+         ng-if="status == true" 
+         ng-click="changeStatus();">
+      </i>
+      <i class="fa fa-toggle-on fa-rotate-180 inactive"
+         ng-if="status == false"
+         ng-click="changeStatus();">
+      </i>
+    </div>
+    <div ng-show='status'>You are open for business!</div>
+    <div ng-show='!status'>Let students know you're online.</div>
+  </div>
+
+  <div id="cssmenu" ng-controller='NavController'>
+    <div id="nav-buttons">
+      <ul>
+        <li ng-class="{ active: isActive('/')}"><a href='/#'>Home</a></li>
+        <li ng-class="{ active: isActive('/login')}" ng-hide='loggedIn'><a href='/#/login'>Login</a></li>
+        <li ng-class="{ active: isActive('/signup')}" ng-hide='loggedIn'><a href='/#/signup'>Signup</a></li>
+        <li ng-class="{ active: isActive('/update')}" ng-show='loggedIn'><a href='/#/update'>Update profile</a></li>
+        <li ng-class="{ active: isActive('/becometutor')}" ng-show='!isTutor'><a href='/#/becometutor'>Become a tutor</a></li>
+        <li ng-show='loggedIn'><a href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+
 </div>
