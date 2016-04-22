@@ -17,7 +17,7 @@ var userSchema = new mongoose.Schema({
   bio: String,
   subjects: Array,
   times: Array,
-  status: {type: Number, default: 1},
+  status: {type: Boolean, default: false},
   imageId: String, //a ref to the image file stored by gridfs
   likers: Array
 });
