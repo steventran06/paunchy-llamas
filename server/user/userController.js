@@ -38,6 +38,19 @@ module.exports = {
       });
   },
 
+  findUser: function(req, res, nex) {
+    console.log(req);
+    findUser({username: req.user.username})
+      .then(function(user) {
+        console.log('HEYYYY USER DATA ---->', user);
+        if (!user) {
+          next( new Error('Invalid user'));
+        } else {
+          res.send(user); 
+        }
+      });
+  },
+
   // return tutors based on searchbar fields
   search: function (req, res, next) {
     var city = req.query.city ? req.query.city.toLowerCase() : null;
