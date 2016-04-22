@@ -27,6 +27,7 @@ angular.module('codellama.tutor', [])
   })
 
   .controller('TutorController', function ($scope, TutorService, $routeParams) {
+
     TutorService.getTutorProfile($routeParams.username)
     .then(function(data) {
       TutorService.tutorData = data;

@@ -20,7 +20,6 @@
         templateUrl: 'app/search/searchResults.html',
         controller: 'SearchResultsController'
       })
-
       .when('/signup', {
         templateUrl: 'app/auth/signup.html',
         controller: 'AuthController'
@@ -54,7 +53,7 @@
         templateUrl: 'app/codeshare/codeshare.html',
         controller: 'CodeshareController'
       })
-      .when('/tutor/:username/github', {
+      .when('/tutor/:github/github', {
         templateUrl: 'app/github/github.html',
         controller: 'gitHubDataController'
       })

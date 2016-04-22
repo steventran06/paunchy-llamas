@@ -77,6 +77,8 @@ app.controller('SearchController', function ($scope, $http, SearchService, $loca
 });
 
 app.controller('SearchResultsController', function ($scope, $timeout, uiGmapGoogleMapApi, SearchService) {
+  var counter = 1;
+
   $scope.tutor = {};
   $scope.tutor.likes = 0;
 
@@ -90,6 +92,7 @@ app.controller('SearchResultsController', function ($scope, $timeout, uiGmapGoog
     function() { return SearchService.tutorData; },
     function(newVal) {
       if (newVal.length !== 0) {
+
         var centerLatitude = 0;
         var centerLongitude = 0;
 
@@ -184,3 +187,4 @@ app.controller('SearchResultsController', function ($scope, $timeout, uiGmapGoog
     }
   );
 });
+
