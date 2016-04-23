@@ -248,7 +248,10 @@ h3 {
 .container-tutor-profile {
   margin: 0px auto;
   padding:20px;
+  background-color: #fff;
   max-width: 800px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
 }
 
 input[type="checkbox"]{
@@ -336,9 +339,8 @@ input[type="checkbox"]:focus{
 
 .profile-box-large {
   background: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   position: relative;
-  min-height: 500px;
+  min-height: 450px;
 }
 
 .profile-box {
@@ -369,7 +371,7 @@ input[type="checkbox"]:focus{
 }
 
 .profile-content-large {
-  padding: 30px 80px 30px 350px;
+  padding: 0 80px 30px 350px;
   text-align: left;
 }
 
@@ -433,7 +435,7 @@ input[type="checkbox"]:focus{
 
 .buttons-container-large-profile {
   position: absolute;
-  margin-top: 335px;
+  margin-top: 270px;
   width: 300px;
   height: auto;
 }
@@ -838,6 +840,11 @@ i.inactive {
 .online-now img {
   width: 7px;
   height: 7px;
+}
+
+.profile-online-now {
+  margin-right: -60px;
+  margin-top: 10px;
 }
 
 #codeshareBox {
