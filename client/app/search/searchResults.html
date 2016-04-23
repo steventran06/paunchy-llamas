@@ -1,10 +1,11 @@
 <!-- Search results -->
 <div class="container-search-results">
-  <div id="search-results-title">Your search results...</div>
-
 
   <!-- Search results entry -->
-  <div class="profile-text" ng-hide="subjectLength">Sorry, no matches!</div>
+  <div class="profile-text" ng-hide="subjectLength"><p>Sorry, no matches!</p></div>
+
+  <div class="section-block" ng-show="subjectLength">
+  <!-- <div id="search-results-title">tutors near you</div> -->
 
   <ui-gmap-google-map center='map.center' zoom='map.zoom' bounds='map.bounds'>
     <ui-gmap-markers models="map.markers" idkey="'id'" icon="'icon'" coords="'coords'" options="'options'" labelContent="'labelContent'">
@@ -14,40 +15,43 @@
   </ui-gmap-google-map>
 
 
-  <div class="container-tutor-card" ng-repeat="tutor in tutorData">
+    <div class="container-tutor-card" ng-repeat="tutor in tutorData">
 
-    <div class="profile-box">
-      <div class="profile-picture" ng-switch="tutor.imageId">
+      <div class="profile-box">
+        <div class="profile-picture" ng-switch="tutor.imageId">
 
-          <img ng-switch-when="undefined" ng-src="../../default-user.jpg" />
-          <img ng-switch-default="tutor.imageId !== '' " ng-src="api/users/img/{{tutor.imageId}}" />
+            <img ng-switch-when="undefined" ng-src="../../default-user.jpg" />
+            <img ng-switch-default="tutor.imageId !== '' " ng-src="api/users/img/{{tutor.imageId}}" />
 
-      </div>
-
-      <div class="profile-content">
-        <div class="profile-text"><a ng-href="/tutor/{{tutor.username}}" />
-          <span class="tutor-name">{{tutor.name}}</span>
-          <span class="greenlight" ng-show="tutor.status">
-            <img ng-src="../assets/greenlight.png" />
-          </span>
-          </a>
-        </div>
-        
-        <div class="profile-text"><span class="tutor-distance">{{tutor.distance}} from you</span></div>
-        <div class="profile-text"><span class="tutor-bio">{{tutor.bio.substring(0, 160) + '...'}}</span></div>
-
-        <div class="profile-text">
-          <div class="tutor-subjects">{{tutor.subjects.join(', ')}}</div>
         </div>
 
-        <div class="profile-text"><span class="tutor-city">{{tutor.location.city}}</span></div>
+        <div class="profile-content">
+          <div class="profile-text"><a ng-href="/tutor/{{tutor.username}}" />
+            <span class="tutor-name">{{tutor.name}}</span>
+            <span class="online-now" ng-show="tutor.status">
+              online now
+              <img ng-src="../assets/greendot-1-1.png" />
+            </span>
+            </a>
+          </div>
+          
+          <div class="profile-text"><span class="tutor-city">{{tutor.location.city}} : {{tutor.distance}} from you</span></div>
+          <!-- <div class="profile-text"><span class="tutor-distance"></span></div> -->
+          <div class="profile-text"><span class="tutor-bio">{{tutor.bio.substring(0, 160) + '...'}}</span></div>
 
-        <div class="card-buttons">
-          <a ng-href="/tutor/{{tutor.username}}/codeshare" /><button type="submit" class="profile-button" class="read-more-button">Code Share</button></a>
-          <a ng-show="tutor.github" ng-href="/tutor/github/{{tutor.username}}" /><button type="submit" class="profile-button" class="read-more-button">Github Profile</button></a>
-          <a ng-href="/tutor/{{tutor.username}}" /><button type="submit" class="profile-button" class="read-more-button">More info...</button></a>
-          <!-- TODO: need to hide this button if not logged in  -->
-          <a ng-href="mailto:{{tutor.email}}" target="_blank"><button ng-disabled="!loggedIn" class="profile-button" class="contact-tutor-button">Message tutor</button></a>
+          <div class="profile-text">
+            <div class="tutor-subjects">{{tutor.subjects.join(', ')}}</div>
+          </div>
+
+
+          <div class="card-buttons">
+
+            <a ng-href="/tutor/{{tutor.username}}/codeshare" /><button ng-disabled="!loggedIn" type="submit" class="profile-button card-button" class="read-more-button">Code Share</button></a>
+            <a ng-show="tutor.github" ng-href="/tutor/github/{{tutor.username}}" /><button type="submit" class="profile-button" class="read-more-button card-button">Github Profile</button></a>
+            <!-- TODO: need to hide this button if not logged in  -->
+            <a ng-href="mailto:{{tutor.email}}" target="_blank"><button ng-disabled="!loggedIn" class="profile-button card-button contact-tutor-button">Message tutor</button></a>
+            <a ng-href="/tutor/{{tutor.username}}" /><button type="submit" class="profile-button read-more-button card-button">More info...</button></a>
+          </div>
         </div>
       </div>
     </div>
