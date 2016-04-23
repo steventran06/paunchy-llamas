@@ -30,7 +30,6 @@ app.service('SearchService', function($http, $window) {
       return resp.data;
     });
   };
-
 });
 
 app.controller('SearchController', function ($scope, $http, SearchService, $location) {

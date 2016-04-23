@@ -44,7 +44,7 @@
 
         <div class="card-buttons">
           <a ng-href="/tutor/{{tutor.username}}/codeshare" /><button type="submit" class="profile-button" class="read-more-button">Code Share</button></a>
-          <a ng-show="tutor.github" ng-href="/tutor/{{tutor.github}}/github" /><button type="submit" class="profile-button" class="read-more-button">Github Profile</button></a>
+          <a ng-show="tutor.github" ng-href="/tutor/github/{{tutor.username}}" /><button type="submit" class="profile-button" class="read-more-button">Github Profile</button></a>
           <a ng-href="/tutor/{{tutor.username}}" /><button type="submit" class="profile-button" class="read-more-button">More info...</button></a>
           <!-- TODO: need to hide this button if not logged in  -->
           <a ng-href="mailto:{{tutor.email}}" target="_blank"><button ng-disabled="!loggedIn" class="profile-button" class="contact-tutor-button">Message tutor</button></a>

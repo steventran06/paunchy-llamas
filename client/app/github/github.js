@@ -1,15 +1,15 @@
 angular.module('codellama.github', [])
 
-.controller('gitHubDataController', ['$scope', '$http', 'SearchService', '$routeParams', function($scope, $http, SearchService, $routeParams){
+.controller('gitHubDataController', ['$scope', '$http', 'SearchService', 'TutorService', '$routeParams', function($scope, $http, SearchService, TutorService, $routeParams){
 
 // inject service into controller
 // inject routeParams to get github profile
-
-  var githubHandle = $routeParams.github;
+  TutorService.getTutorProfile($routeParams.username)
+  .then(function(data) {
+    TutorService.tutorData = data;
 
   // send get request to github, receive max 30 repositories
-  $scope.username = githubHandle;
-  $http.get("https://api.github.com/users/" + $scope.username)
+  $http.get("https://api.github.com/users/" + TutorService.tutorData.github)
     .success(function (data) {
       $scope.userData = data;
       loadRepos();
@@ -20,7 +20,15 @@ angular.module('codellama.github', [])
               $scope.repoData = data;
           });
   };
-
   // sort repositories by updated_at
-  $scope.predicate = '-updated_at';
+  $scope.predicate = '-updated_at';    
+  });
+    $scope.$watch(
+      function() { 
+        return TutorService.tutorData; },
+
+      function(newVal) {
+        $scope.tutor = newVal;
+      }
+    );
 }]);

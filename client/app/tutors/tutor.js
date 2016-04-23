@@ -14,6 +14,18 @@ angular.module('codellama.tutor', [])
       });
     };
 
+    this.getTutorGithubProfile = function(github){
+      console.log('in tutor services ', github);
+      return $http({
+        method: 'GET',
+        url: '/api/tutor/',
+        params: {'github': github}
+      })
+      .then(function (resp) {
+        return resp.data;
+      });
+    };
+
     this.likeTutor = function(username) {
       return $http({
         method: 'PUT',
@@ -28,10 +40,14 @@ angular.module('codellama.tutor', [])
 
   .controller('TutorController', function ($scope, TutorService, $routeParams) {
 
+    console.log($routeParams.username);
+
     TutorService.getTutorProfile($routeParams.username)
     .then(function(data) {
       TutorService.tutorData = data;
     });
+
+    console.log(TutorService.tutorData);
 
     $scope.likeTutor = function(username) {
       TutorService.likeTutor(username)
@@ -44,7 +60,8 @@ angular.module('codellama.tutor', [])
     };
 
     $scope.$watch(
-      function() { return TutorService.tutorData; },
+      function() { 
+        return TutorService.tutorData; },
 
       function(newVal) {
         $scope.tutor = newVal;
