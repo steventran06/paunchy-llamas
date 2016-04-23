@@ -18,6 +18,8 @@ module.exports = function (app, express) {
   app.post('/api/users/signin', userController.signin);
 
   app.get('/api/tutor/:username', userController.findTutor);
+  app.get('/api/tutor/:github', userController.findTutorByGithub);
+
   app.get('/api/users/img/:objectId', userController.getImg);
 
   app.get('/api/users/myProfile', helpers.decode, multipartMiddleware, userController.findUser);

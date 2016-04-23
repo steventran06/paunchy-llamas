@@ -38,6 +38,21 @@ module.exports = {
       });
   },
 
+  // return a tutor's profile
+  findTutorByGithub: function(req, res, nex) {
+    
+    console.log('here');
+
+    findUser({github: req.params.github})
+      .then(function(tutor) {
+        if (!tutor) {
+          next( new Error('Invalid tutor'));
+        } else {
+          res.send(tutor);
+        }
+      });                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+  },
+
   findUser: function(req, res, nex) {
     console.log(req);
     findUser({username: req.user.username})
