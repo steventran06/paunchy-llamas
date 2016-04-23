@@ -23,38 +23,50 @@ app.service('SearchService', function($http, $window) {
   };
 
   this.getProfile = function() {
-    // var token = $window.localStorage.getItem('com.codellama');
     return $http({
       method: 'GET',
       url: '/api/users/myProfile',
     }).then(function(resp) {
       return resp.data;
-      console.log(resp.data)
     });
   };
 
 });
 
-app.controller('SearchController', function ($scope, SearchService, $location) {
+app.controller('SearchController', function ($scope, $http, SearchService, $location) {
 
+  SearchService.getProfile()
+    .then(function(user) {
+      SearchService.myData = user;
+  });
   // define search on scope
   $scope.search = function(city, subjects) {
-
-
     // call function from SearchService
     SearchService.getTutors(city, subjects)
-
       // upon success, assign returned tutors data to scope's tutorData
       .then(function(tutors) {
-        SearchService.tutorData = tutors;
-        SearchService.getProfile()
-          .then(function(profile) {
-            SearchService.myData = profile;
+        // get logged in user's coordinates
+        var userCoords = [SearchService.myData.coordinates.lat,SearchService.myData.coordinates.lng].join(',');
+        // loop through tutors, run Google Distance Matrix api on each to get distance from user
+        var allTutorCoordinates = [];
+        for (var i = 0; i < tutors.length; i++) {
+          var tutor = tutors[i];
+          var tutorCoords = [tutor.coordinates.lat, tutor.coordinates.lng].join('%2C');
+          allTutorCoordinates.push(tutorCoords);
+        }
+        // get all distances of tutors from user
+        $http.get("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + userCoords + "&destinations=" + allTutorCoordinates.join('%7C') + "&key=AIzaSyAzoQMg9Pt-fERCwyXdhxwwGGNXlzty9Ng")
+          .success(function(data) {
+            for (var j = 0; j < tutors.length; j++) {
+              // assign appropriate distance to tutor
+              tutors[j].distance = data.rows[0].elements[j].distance.text;
+            }
+            SearchService.tutorData = tutors;
+            console.log(SearchService.tutorData);
             $location.path('/search');
-          })
-          .catch(function(error) {
-            console.log('There was an error retrieving profile data: ', error);
-        });
+          });
+
+        // how to wait until loop finishes before attempting this next
       })
 
       // on error, console log error
