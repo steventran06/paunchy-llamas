@@ -134,7 +134,7 @@ angular.module('codellama.codeshare', [])
       return CodeMirror(document.getElementById('codeshare-input'), {
         value: '\'Write your code here\'',
         mode:  'javascript',
-        theme: 'ambiance',
+        theme: 'mdn-like',
         lineNumbers: true
       });
     }

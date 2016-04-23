@@ -1,32 +1,40 @@
-<div id="logo"><span>Code Tutor</span></div>
 
 <div ng-app='codellama.nav'>
 
-  <div ng-controller="ToggleController" ng-init="init()" ng-show='loggedIn'>
+  <div id="cssmenu" ng-controller='NavController'>
+    <div id="nav-buttons">
+      <ul>
+        <li ng-class="{ active: isActive('/')}"><a href='/#'>home</a></li>
+        <li ng-class="{ active: isActive('/login')}" ng-hide='loggedIn'><a href='/#/login'>login</a></li>
+        <li ng-class="{ active: isActive('/signup')}" ng-hide='loggedIn'><a href='/#/signup'>signup</a></li>
+        <li ng-class="{ active: isActive('/update')}" ng-show='loggedIn'><a href='/#/update'>update profile</a></li>
+        <li ng-class="{ active: isActive('/becometutor')}" ng-show='!isTutor'><a href='/#/becometutor'>become a tutor</a></li>
+        <li ng-show='loggedIn'><a href="/logout">logout</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- logo for codify -->
+<div id="logo">
+  <a href="/#">
+    <img src="./../assets/codifylogo-main-1-1.png" />
+    <img src="./../assets/codifylogo-cursor-1-1.gif" />
+  </a>
+</div>
+<h2 class="slogan">where coders meet students</h2>
+
+  <div ng-controller="ToggleController" ng-init="init()" ng-show='loggedIn' id="chat-status-toggler">
     <div id="toggleButton">
       <i class="fa fa-toggle-on active"
          ng-if="status == true" 
          ng-click="changeStatus();">
       </i>
-      <div ng-show="status"> You are available to chat!</div>
+      <div ng-show="status"><p class="chat-status">visible to chat</p></div>
       <i class="fa fa-toggle-on fa-rotate-180 inactive"
          ng-if="status == false"
          ng-click="changeStatus();">
       </i>
-      <div ng-show='!status'>Let others know you're online.</div>
-    </div>
-  </div>
-
-  <div id="cssmenu" ng-controller='NavController'>
-    <div id="nav-buttons">
-      <ul>
-        <li ng-class="{ active: isActive('/')}"><a href='/#'>Home</a></li>
-        <li ng-class="{ active: isActive('/login')}" ng-hide='loggedIn'><a href='/#/login'>Login</a></li>
-        <li ng-class="{ active: isActive('/signup')}" ng-hide='loggedIn'><a href='/#/signup'>Signup</a></li>
-        <li ng-class="{ active: isActive('/update')}" ng-show='loggedIn'><a href='/#/update'>Update profile</a></li>
-        <li ng-class="{ active: isActive('/becometutor')}" ng-show='!isTutor'><a href='/#/becometutor'>Become a tutor</a></li>
-        <li ng-show='loggedIn'><a href="/logout">Logout</a></li>
-      </ul>
+      <div ng-show='!status'><p class="chat-status">invisible</p></div>
     </div>
   </div>
 

@@ -1,17 +1,33 @@
 /* app css stylesheet */
 body {
-  background-color: #81CFE0 !important;
+  background-color: #fff !important;
+  background: url(./../assets/mountains.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
   margin: 0px !important;
   padding: 0px !important;
   text-align: center !important; /* !!! */
 }
 
 a {
-  color: #848482 !important;
+  color: #fff !important;
+}
+
+p {
+  color: #fff;
+  font-family: 'Open-Sans', sans-serif;
 }
 
 h1 {
   color: #848482 !important;
+}
+
+h2 {
+  color: #fff;
+  font-size: 1.5em;
+  font-weight: 100;
 }
 
 .adjust {
@@ -24,15 +40,20 @@ h1 {
 
 #logo {
   font-size: 2.5em;
-  font-family: 'Lobster', cursive;
+  font-family: 'Open-Sans', sans-serif;
+  font-weight: 300;
   color: #fff;
-  padding: 30px 0px 10px 0px;
+  padding: 100px 0px 10px 0px;
+}
+
+.slogan {
+  margin: -5px 0;
 }
 
 #footer-text {
-  font-size: 1.5em;
-  font-family: 'Lobster', cursive;
-  color: #848482 !important;
+  font-size: 1em;
+  font-family: 'Open-Sans', sans-serif;
+  color: #fff !important;
   margin: auto;
 }
 
@@ -85,18 +106,18 @@ h1 {
 }
 
 #container-search {
-  margin-top: 30px;
+  margin-top: 0;
   padding: 10px;
   width: 100%;
   height: 200px;
-  background-color: #E4F1FE;
+  background: none;
 }
 
 #searchBar {
   padding: 10px;
   height: 60px;
   width: 65%;
-  background-color: #E4F1FE;
+  background: none;
   margin: 20px auto;
 }
 
@@ -127,7 +148,7 @@ h1 {
   margin: 0 auto 15px;
   padding: 15px;
   border: none;
-  border-bottom: 2px solid #ebebeb;
+  border-radius: 5px;
 }
 
 .input:focus {
@@ -155,9 +176,7 @@ h1 {
   margin: 30px auto 30px;
   color: white;
   border: none;
-  -webkit-box-shadow: 0 5px 0 #F2784B;
-  -moz-box-shadow: 0 5px 0 #F2784B;
-  box-shadow: 0 5px 0 #F2784B;
+  border-radius: 5px;
 }
 
 #container-search .input {
@@ -179,9 +198,6 @@ h1 {
   color: white;
   background-color: #F89406;
   border: none;
-  -webkit-box-shadow: 0 5px 0 #F2784B;
-  -moz-box-shadow: 0 5px 0 #F2784B;
-  box-shadow: 0 5px 0 #F2784B;
 }
 
 .signinButton {
@@ -200,9 +216,9 @@ h1 {
 
 .inputButton:hover {
   top: 2px;
-  -webkit-box-shadow: 0 3px 0 #F2784B;
+/*  -webkit-box-shadow: 0 3px 0 #F2784B;
   -moz-box-shadow: 0 3px 0 #F2784B;
-  box-shadow: 0 3px 0 #F2784B;
+  box-shadow: 0 3px 0 #F2784B;*/
 }
 
 .inputButton:active {
@@ -221,7 +237,7 @@ h1 {
 
 .container-tutor-card {
   margin: 25px auto;
-  width: 1000px;
+  width: 100%;
 }
 
 .container-tutor-profile {
@@ -276,6 +292,7 @@ input[type="checkbox"]:focus{
 
 .tutor-name {
   font-size: 2.5em;
+  font-weight: 400;
   color: #777777;
 }
 
@@ -285,22 +302,22 @@ input[type="checkbox"]:focus{
   text-transform: capitalize;
 }
 
-.tutor-distance {
-  font-size: 1.4em;
-  color: #777777;
-  white-space: pre-wrap;
-}
-
 .tutor-bio {
   font-size: 1.1em;
-  color: #777777;
+  color: #777;
   white-space: pre-wrap;
 }
 
 .tutor-city {
-  font-size: 1.5em;
-  color: #F89406;
+  font-size: 1.25em;
+  color: #777;
   text-transform: capitalize;
+}
+
+.tutor-distance {
+  font-size: 1em;
+  color: #777;
+  white-space: pre-wrap;
 }
 
 .tutor-update-question {
@@ -309,7 +326,7 @@ input[type="checkbox"]:focus{
 }
 
 .profile-text {
-  padding: 0px 0px 15px 0px;
+  padding: 0;
 }
 
 .profile-box-large {
@@ -385,6 +402,10 @@ input[type="checkbox"]:focus{
   right: 5px;
 }
 
+.card-button {
+  border-radius: 5px;
+}
+
 .profile-button {
   border: 0 none;
   padding: 12px 18px;
@@ -453,7 +474,7 @@ button[disabled] {
 }
 
 #search-results-title {
-  font-size: 2.5em;
+  font-size: 1.5em;
   color: #fff;
   text-align: center; 
 }
@@ -474,7 +495,7 @@ button[disabled] {
   padding: 20px;
   width: 100%;
   height: auto;
-  background-color: #E4F1FE;
+  background: none;
   position: relative;
   /*
   bottom: 0px;
@@ -488,15 +509,20 @@ button[disabled] {
 
 #nav-buttons {
   font-size: 2.5em;
-  color: #777777;
+  color: #777;
+}
+
+.nav-footer {
+  font-size: 1em;
 }
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:700);
 #cssmenu {
-  background: #81CFE0;
+  background-color: rgba(0, 0, 0, 0.1);
   width: 100%;
   position: absolute;
   text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 #cssmenu ul {
@@ -537,8 +563,8 @@ button[disabled] {
   display: block;
   padding: 15px 25px;
   font-family: 'Open Sans', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: 300;
+  /*text-transform: uppercase;*/
   font-size: 14px;
   position: relative;
   -webkit-transition: color .25s;
@@ -667,18 +693,18 @@ button[disabled] {
 #container-home {
   margin-top: 20px;
   margin-bottom: 20px;
-  height: 600px;
+  height: 300px;
   width: auto;
-  background: url(./../app/homepage/map.jpg) no-repeat center center fixed;
+  /*background: url(./../app/homepage/map.jpg) no-repeat center center fixed;*/
   background-size: cover;
   background-clip: border-box;
 
-    -moz-box-shadow:    inset  0  8px 8px -8px #696868, 
+/*    -moz-box-shadow:    inset  0  8px 8px -8px #696868, 
                         inset  0 -8px 8px -8px #696868;
     -webkit-box-shadow: inset  0  8px 8px -8px #696868, 
                         inset  0 -8px 8px -8px #696868;
      box-shadow:        inset  0  8px 8px -8px #696868, 
-                        inset  0 -8px 8px -8px #696868;
+                        inset  0 -8px 8px -8px #696868;*/
 
 }
 
@@ -779,12 +805,12 @@ select:invalid {
   font-size:40px;cursor:pointer;
 }
 
-i.active { 
-  color: #5cb85c
+i.active {
+  color: #fff
 }
 
 i.inactive {
-  color: #d9534f
+  color: #fff
 }
 
 .codeshare-form {
@@ -796,12 +822,17 @@ i.inactive {
   float: right;
 }
 
-.greenlight img {
-  width: 50px;
-  height: 50px;
+.online-now {
+  color: #555;
+  width: auto;
   float: right;
   margin-left: 10px;
   margin-right: 10px;
+}
+
+.online-now img {
+  width: 7px;
+  height: 7px;
 }
 
 #codeshareBox {
@@ -846,9 +877,27 @@ i.inactive {
   line-height: 12px;
 } 
 
+p .chat-status {
+  font-size: 1em;
+}
+
+#chat-status-toggler {
+  float: right;
+  text-align: center;
+  margin-top: -75px;
+  margin-right: 20px;
+}
+
+#container-codeshare {
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 5px;
+  width: 90%;
+}
+
 .codeshare-form {
   width: 50%;
-  height: 500px;
+  height: 1000px;
 }
 
 #codeshare-input {
@@ -862,12 +911,18 @@ i.inactive {
   height: 25px;
   align: left;
   border: none;
-  border-radius: 0 5px 0 0;
+  border-radius: 5px 5px 0 0;
 }
 
 .other-user {
   background-color: #2dd;
   color: #fff;
+}
+
+.section-block {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
 }
 
 .codeshare-select {
@@ -876,4 +931,11 @@ i.inactive {
   border: none;
   height: 30px;
   margin: 5px;
+}
+
+.labelClass {
+  background-color: rgba(255, 255, 255, .8);
+  padding: 8px 0;
+  border-radius: 5px;
+  color: #777;
 }
