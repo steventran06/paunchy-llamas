@@ -44,33 +44,32 @@ app.controller('SearchController', function ($scope, $http, SearchService, $loca
         var userCoords = [37.7749, -122.4194].join(',');
         if (SearchService.myData !== null) {
           var userCoords = [SearchService.myData.coordinates.lat,SearchService.myData.coordinates.lng].join(',');
-        }
-        // loop through tutors, run Google Distance Matrix api on each to get distance from user
-        var allTutorCoordinates = [];
-        for (var i = 0; i < tutors.length; i++) {
-          var tutor = tutors[i];
-          var tutorCoords = [tutor.coordinates.lat, tutor.coordinates.lng].join('%2C');
-          allTutorCoordinates.push(tutorCoords);
-        }
-        // get all distances of tutors from user
-        $http.get("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + userCoords + "&destinations=" + allTutorCoordinates.join('%7C') + "&key=AIzaSyAzoQMg9Pt-fERCwyXdhxwwGGNXlzty9Ng")
-          .success(function(data) {
-            for (var j = 0; j < tutors.length; j++) {
-              // assign appropriate distance to tutor
-              tutors[j].distance = data.rows[0].elements[j].distance.text;
-            }
-            SearchService.tutorData = tutors;
-            console.log(SearchService.tutorData);
-            $location.path('/search');
-          });
+          // loop through tutors, run Google Distance Matrix api on each to get distance from user
+          var allTutorCoordinates = [];
+          for (var i = 0; i < tutors.length; i++) {
+            var tutor = tutors[i];
+            var tutorCoords = [tutor.coordinates.lat, tutor.coordinates.lng].join('%2C');
+            allTutorCoordinates.push(tutorCoords);
+          }
+          // get all distances of tutors from user
+          $http.get("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + userCoords + "&destinations=" + allTutorCoordinates.join('%7C') + "&key=AIzaSyDvrSHps67YwiBew80UDfSQ0gepQ6wYvuI")
+            .success(function(data) {
+              for (var j = 0; j < tutors.length; j++) {
+                // assign appropriate distance to tutor
+                tutors[j].distance = data.rows[0].elements[j].distance.text;
+              }
+              SearchService.tutorData = tutors;
+              $location.path('/search');
+            });
 
-        // how to wait until loop finishes before attempting this next
-      })
+          // how to wait until loop finishes before attempting this next
+        })
 
-      // on error, console log error
-      .catch(function(error) {
-        console.log('There was an error retrieving tutor data: ', error);
-      });
+        // on error, console log error
+        .catch(function(error) {
+          console.log('There was an error retrieving tutor data: ', error);
+        });
+    });
   };
 });
 

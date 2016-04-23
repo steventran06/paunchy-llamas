@@ -102,7 +102,7 @@ app.controller('uploadCtrl', ['$scope', '$http', 'uiGmapGoogleMapApi', 'Upload',
       var street = myAddress.address.split(' ').join('+');
       var city = myAddress.city.split(' ').join('+');
       var state = myAddress.state.split(' ').join('+');
-      $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + street + city + state + '&key=AIzaSyCrq_adWxK-NFB96FMg_2jtJcJBoMbXVNA').success(function(data) {
+      $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + street + city + state + '&key=AIzaSyDvrSHps67YwiBew80UDfSQ0gepQ6wYvuI').success(function(data) {
         $scope.data.coordinates = data.results[0].geometry.location;
         console.log($scope.data);
         file.upload = Upload.upload({
