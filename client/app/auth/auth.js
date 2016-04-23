@@ -8,7 +8,7 @@ angular.module('codellama.auth', [])
   $scope.signin = function () {
     Auth.signin($scope.user)
       .then(function (token) {
-
+        window.cdUserEmail = $scope.user.email;
         $rootScope.loggedIn = true;
 
         $window.localStorage.setItem('com.codellama', token);

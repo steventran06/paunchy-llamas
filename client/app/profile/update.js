@@ -8,28 +8,6 @@ app.controller('uploadCtrl', ['$scope', '$http', 'uiGmapGoogleMapApi', 'Upload',
   $scope.data.coordinates = {};
   $scope.data.times = [];
 
-  // some map shit
-  // angular.extend($scope, {
-  //   map: {center: 
-  //     { 
-  //       latitude: 37.7749, 
-  //       longitude: -122.4194
-  //     }, 
-  //     zoom: 12,
-  //     markers: [{ 
-  //       latitude: 37.7749, 
-  //       longitude: -122.4194
-  //     }]
-  //   },
-  //   options: {
-  //     scrollwheel: true
-  //   }
-  // });
-
-  // GoogleMapApi.then(function(maps) {
-  //   maps.visualRefresh = true;
-  // });
-
   $scope.times = [
     'Espresso Shift (6am - 9am)',
     'Coffee Shift (9am - Noon)',

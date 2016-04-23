@@ -8,7 +8,6 @@
 
   <ui-gmap-google-map center='map.center' zoom='map.zoom' bounds='map.bounds'>
     <ui-gmap-markers models="map.markers" idkey="'id'" icon="'icon'" coords="'coords'" options="'options'" labelContent="'labelContent'">
-      <ui-gmap-windows></ui-gmap-windows>
     </ui-gmap-markers>
     <ui-gmap-circle ng-repeat="c in map.circles track by c.id" center="c.center" title="c.title" stroke="c.stroke" fill="c.fill" radius="c.radius"
       visible="c.visible" geodesic="c.geodesic" editable="c.editable" draggable="c.draggable" clickable="c.clickable" control="c.control"></ui-gmap-circle>
@@ -44,6 +43,7 @@
         <div class="profile-text"><span class="tutor-city">{{tutor.location.city}}</span></div>
 
         <div class="card-buttons">
+          <a ng-href="/tutor/{{tutor.username}}/codeshare" /><button type="submit" class="profile-button" class="read-more-button">Code Share</button></a>
           <a ng-href="/tutor/{{tutor.username}}" /><button type="submit" class="profile-button" class="read-more-button">More info...</button></a>
           <!-- TODO: need to hide this button if not logged in  -->
           <a ng-href="mailto:{{tutor.email}}" target="_blank"><button ng-disabled="!loggedIn" class="profile-button" class="contact-tutor-button">Message tutor</button></a>
