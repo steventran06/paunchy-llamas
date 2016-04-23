@@ -61,7 +61,6 @@ app.controller('SearchController', function ($scope, $http, SearchService, $loca
               tutors[j].distance = data.rows[0].elements[j].distance.text;
             }
             SearchService.tutorData = tutors;
-            console.log(SearchService.tutorData);
             $location.path('/search');
           });
 
