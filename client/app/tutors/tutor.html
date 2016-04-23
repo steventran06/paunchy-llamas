@@ -9,15 +9,6 @@
     <table>
       <tr>
         <td>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <span class="large-profile-button blue">Username: {{ tutor.username }}</span>
-        </td>
-      </tr>       
-      <tr>
-        <td>
           <a ng-href="mailto:{{tutor.email}}" target="_blank"><button type="submit" ng-disabled="!loggedIn" class="large-profile-button message" class="contact-tutor-button-large">Message tutor</button></a>
         </td>
       </tr>
@@ -32,10 +23,12 @@
     <div class="profile-content-large">
       <div class="profile-text">
         <span class="tutor-name">{{tutor.name}}</span>
-          <span class="greenlight" ng-show="tutor.status">
-            <img ng-src="../assets/greenlight.png" />
+          <span class="online-now profile-online-now" ng-show="tutor.status">
+          online now
+            <img ng-src="../assets/greendot-1-1.png" />
           </span>
       </div>
+      <div class="profile-text"><span class="tutor-city">{{tutor.location.city}}</span></div>
       <div class="profile-text">
         <span class="tutor-bio">{{tutor.bio}}</span>
       </div>
@@ -47,7 +40,6 @@
       <div class="tutor-subjects">{{tutor.subjects.join(', ')}}</div>
 
       </div>
-      <div class="profile-text"><span class="tutor-city">{{tutor.location.city}}</span></div>
     </div>
   </div>
 </div>
