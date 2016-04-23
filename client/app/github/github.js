@@ -7,7 +7,6 @@ angular.module('codellama.github', [])
   TutorService.getTutorProfile($routeParams.username)
   .then(function(data) {
     TutorService.tutorData = data;
-
   // send get request to github, receive max 30 repositories
   $http.get("https://api.github.com/users/" + TutorService.tutorData.github)
     .success(function (data) {
