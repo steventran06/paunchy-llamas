@@ -3,6 +3,11 @@
   <div id="connected-users">
     <div class="connected-user"></div>
   </div>
+
+  <div><icecomm-connect class="profile-button card-button"></icecomm-connect><icecomm-leave class="profile-button card-button"></icecomm-leave></div>
+  <div><icecomm-local></icecomm-local/></div>
+  <div><icecomm-peer></icecomm-peer></div>
+
   <div id="codeshare-box" >
     <!-- language selection -->
     <select ng-options="language for language in languages" ng-model="language" ng-init="language = languages[6]" ng-change="setLanguage(language)" name="languages" id="languages" class="codeshare-select">
