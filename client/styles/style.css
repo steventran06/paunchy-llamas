@@ -288,6 +288,12 @@ input[type="checkbox"]:focus{
   text-transform: capitalize;
 }
 
+.tutor-distance {
+  font-size: 1.4em;
+  color: #777777;
+  white-space: pre-wrap;
+}
+
 .tutor-bio {
   font-size: 1.1em;
   color: #777777;
